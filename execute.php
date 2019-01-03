@@ -65,39 +65,39 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 }
 
 //<-- Comandi al rele GPIO0
-elseif($text=="r00"){
+elseif(strpos($text,"r00")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r00");
 }
-elseif($text=="r01"){
+elseif(strpos($text,"r01")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r01");
 }
 //<-- Comandi al rele GPIO1
-elseif($text=="r10"){
+elseif(strpos($text,"r10")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r10");
 }
-elseif($text=="r11"){
+elseif(strpos($text,"r11")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r11");
 }
 //<-- Comandi al rele GPIO2
-elseif($text=="r20"){
+elseif(strpos($text,"r20")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r20");
 }
-elseif($text=="r21"){
+elseif(strpos($text,"r21")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r21");
 }
 //<-- Comandi al rele GPIO3
-elseif($text=="r30"){
+elseif(strpos($text,"r30")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r30");
 }
-elseif($text=="r31"){
+elseif(strpos($text,"r31")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r31");
 }
 //<-- Comando Total OFF
-elseif($text=="roff"){
+elseif(strpos($text,"roff")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/rf0");
 }
 //<-- Comando Total ON
-elseif($text=="ron"){
+elseif(strpos($text,"ron")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/rf1");
 }
 
@@ -129,6 +129,7 @@ $parameters["method"] = "sendMessage";
 $parameters["reply_markup"] = '{ "keyboard": [
 ["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
 ["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
+["/ron \ud83d\udd34", "/roff \ud83d\udd35"],
 ["/status \u2753"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
