@@ -102,9 +102,8 @@ elseif(strpos($text,"r31")){
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
-	//$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf/0"),29);
-	//$response = substr($resp,0,-15);
-	$response = file_get_contents("http://dario95.ddns.net:20083/r?");
+	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf/0"),29);
+	$response = substr($resp,0,-15);
 }
 //<-- Comando Total ON
 elseif(strpos($text,"ron")){
@@ -114,7 +113,7 @@ elseif(strpos($text,"ron")){
 
 //<-- Lettura stato dei rele
 elseif(strpos($text,"status")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r?");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r0?");
 }
 
 //<-- Manda a video la risposta completa
