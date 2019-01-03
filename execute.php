@@ -94,11 +94,11 @@ elseif(strpos($text,"r31")){
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rf/0");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/rf/0"),29);
 }
 //<-- Comando Total ON
 elseif(strpos($text,"ron")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rf/1");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/rf/1"),29);
 }
 
 //<-- Lettura stato dei rele
