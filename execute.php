@@ -66,31 +66,31 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 
 //<-- Comandi al rele GPIO0
 elseif(strpos($text,"r00")){
-	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r0/0"),27);
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r0/0"),29);
 }
 elseif(strpos($text,"r01")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r0/1");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r0/1"),29);
 }
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r1/0");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r1/0"),29);
 }
 elseif(strpos($text,"r11")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r1/1");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r1/1"),29);
 }
 //<-- Comandi al rele GPIO2
 elseif(strpos($text,"r20")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r2/0");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r2/0"),29);
 }
 elseif(strpos($text,"r21")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r2/1");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r2/1"),29);
 }
 //<-- Comandi al rele GPIO3
 elseif(strpos($text,"r30")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r3/0");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r3/0"),29);
 }
 elseif(strpos($text,"r31")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r3/1");
+	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r3/1"),29);
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
