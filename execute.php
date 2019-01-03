@@ -61,44 +61,44 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/r10 -> GPIO1 LOW  /r11 -> GPIO1 HIGH 
 	/r20 -> GPIO2 LOW  /r21 -> GPIO2 HIGH 
 	/r30 -> GPIO3 LOW  /r31 -> GPIO3 HIGH 
-	/rele4lamps  -> Lettura     \n/verbose -> parametri del messaggio";
+	/status  -> Lettura     \n/verbose -> parametri del messaggio";
 }
 
 //<-- Comandi al rele GPIO0
 elseif(strpos($text,"r00")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r00");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r0/0");
 }
 elseif(strpos($text,"r01")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r01");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r0/1");
 }
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r10");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r1/0");
 }
 elseif(strpos($text,"r11")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r11");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r1/1");
 }
 //<-- Comandi al rele GPIO2
 elseif(strpos($text,"r20")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r20");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r2/0");
 }
 elseif(strpos($text,"r21")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r21");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r2/1");
 }
 //<-- Comandi al rele GPIO3
 elseif(strpos($text,"r30")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r30");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r3/0");
 }
 elseif(strpos($text,"r31")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/r31");
+	$response = file_get_contents("http://dario95.ddns.net:20083/r3/1");
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rf0");
+	$response = file_get_contents("http://dario95.ddns.net:20083/rf/0");
 }
 //<-- Comando Total ON
 elseif(strpos($text,"ron")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rf1");
+	$response = file_get_contents("http://dario95.ddns.net:20083/rf/1");
 }
 
 //<-- Lettura stato dei rele
