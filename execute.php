@@ -111,8 +111,6 @@ elseif($text=="/verbose"){
 	$response = "chatId ".$chatId. "   messId ".$messageId. "  user ".$username. "   lastname ".$lastname. "   firstname ".$firstname ;		
 	$response = $response. "\n\n Heroku + dropbox gmail.com";
 }
-
-
 else
 {
 	$response = "Unknown command!";			//<---Capita quando i comandi contengono lettere maiuscole
