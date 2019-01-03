@@ -19,6 +19,15 @@ riferimenti:
 https://gist.github.com/salvatorecordiano/2fd5f4ece35e75ab29b49316e6b6a273
 https://www.salvatorecordiano.it/creare-un-bot-telegram-guida-passo-passo/
 */
+
+//------passaggio da getupdates a  WEBHOOK
+//da browser request ->   https://api.telegram.org/bot410191340:AAG-7kkwvi6j6ajxuDy7ke1P8tDAh5bjC3U/setWebhook?url=https://rele4lamps.herokuapp.com/execute.php
+//					 answer  <-   {"ok":true,"result":true,"description":"Webhook was set"}
+//          From now If the bot is using getUpdates, will return an object with the url field empty.
+//------passaggio da webhook a  GETUPDATES
+//da browser request ->   https://api.telegram.org/bot410191340:AAG-7kkwvi6j6ajxuDy7ke1P8tDAh5bjC3U/setWebhook?url=
+//					 answer  <-   {"ok":true,"result":true,"description":"Webhook was deleted"}
+
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
@@ -48,29 +57,53 @@ $response = '';
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	$response = "Ciao $firstname, benvenuto! \n List of commands : 
-	/on_on -> outlet ON  heater ON
-	/plon_htof -> outlet ON   heater OFF  
-	/plof_hton -> outlet OFF  heater ON 
-	/off_off -> outlet OFF  heater OFF 
-	/heatplug  -> Lettura stazione6 ... su bus RS485  \n/verbose -> parametri del messaggio";
+	/r00 -> GPIO0 LOW  /r01 -> GPIO0 HIGH
+	/r10 -> GPIO1 LOW  /r11 -> GPIO1 HIGH 
+	/r20 -> GPIO2 LOW  /r21 -> GPIO2 HIGH 
+	/r30 -> GPIO3 LOW  /r31 -> GPIO3 HIGH 
+	/rele4lamps  -> Lettura     \n/verbose -> parametri del messaggio";
 }
 
-//<-- Comandi ai rele
-elseif($text=="on_on"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/6/3");
+//<-- Comandi al rele GPIO0
+elseif($text=="r00"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r00");
 }
-elseif(strpos($text,"plon_htof")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/6/2");
+elseif($text=="r01"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r01");
 }
-elseif(strpos($text,"plof_hton")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/6/1");
+//<-- Comandi al rele GPIO1
+elseif($text=="r10"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r10");
 }
-elseif(strpos($text,"off_off")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/6/0");
+elseif($text=="r11"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r11");
 }
-//<-- Lettura parametri slave5
-elseif(strpos($text,"heatplug")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/heatplug");
+//<-- Comandi al rele GPIO2
+elseif($text=="r20"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r20");
+}
+elseif($text=="r21"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r21");
+}
+//<-- Comandi al rele GPIO3
+elseif($text=="r30"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r30");
+}
+elseif($text=="r31"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r31");
+}
+//<-- Comando Total OFF
+elseif($text=="roff"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/rf0");
+}
+//<-- Comando Total ON
+elseif($text=="ron"){
+	$response = file_get_contents("http://dario95.ddns.net:20083/rf1");
+}
+
+//<-- Lettura stato dei rele
+elseif(strpos($text,"status")){
+	$response = file_get_contents("http://dario95.ddns.net:20083/r?");
 }
 
 //<-- Manda a video la risposta completa
@@ -93,7 +126,11 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/plon_htof \ud83d\udd0c"],["/plof_hton \ud83d\udd04", "/off_off \ud83d\udd35"],["/heatplug \u2753"]], "resize_keyboard": true, "one_time_keyboard": false}';
+$parameters["reply_markup"] = '{ "keyboard": [
+["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
+["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
+["/status \u2753"]],
+ "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
