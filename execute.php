@@ -102,8 +102,9 @@ elseif(strpos($text,"r31")){
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf/0"),29);
-	$response = substr($resp,0,-15);
+	//$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf/0"),29);
+	//$response = substr($resp,0,-15);
+	$response = file_get_contents("http://dario95.ddns.net:20083/r?");
 }
 //<-- Comando Total ON
 elseif(strpos($text,"ron")){
