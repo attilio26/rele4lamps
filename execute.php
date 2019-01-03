@@ -67,7 +67,6 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 //<-- Comandi al rele GPIO0
 elseif(strpos($text,"r00")){
 	$response = substr(file_get_contents("http://dario95.ddns.net:20083/r0/0"),18);
-	$array 
 }
 elseif(strpos($text,"r01")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/r0/1");
