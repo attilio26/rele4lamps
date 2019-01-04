@@ -78,6 +78,9 @@ elseif(strpos($text,"r01")){
 elseif(strpos($text,"r10")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r10"),29);
 	$response = substr($resp,0,-15);
+	$resp1 = substr($response,0,10);
+	$resp2 = substr($response,0,-4);
+	$response = $resp1.$resp2;
 }
 elseif(strpos($text,"r11")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r11"),29);
