@@ -1,5 +1,5 @@
 <?php
-//03-01-2018
+//04-01-2018
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -63,7 +63,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/r30 -> GPIO3 LOW  /r31 -> GPIO3 HIGH 
 	/status  -> Lettura     \n/verbose -> parametri del messaggio";
 }
-
+/*
 //<-- Comandi al rele GPIO0
 elseif(strpos($text,"r00")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r00"),29);
@@ -73,6 +73,7 @@ elseif(strpos($text,"r01")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r01"),29);
 	$response = substr($resp,0,-15);
 }
+*/
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r10"),29);
@@ -115,6 +116,10 @@ elseif(strpos($text,"ron")){
 elseif(strpos($text,"stato")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/st");
 }
+//<-- reset modulo
+elseif(strpos($text,"reset")){
+	$response = file_get_contents("http://dario95.ddns.net:20083/rst");
+}
 
 //<-- Manda a video la risposta completa
 elseif($text=="/verbose"){
@@ -135,10 +140,10 @@ $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
 $parameters["reply_markup"] = '{ "keyboard": [
-["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
-["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
+["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34"],
+["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35"],
 ["/ron \ud83d\udd34", "/roff \ud83d\udd35"],
-["/stato \u2753"]],
+["/stato \u2753", "/reset"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
