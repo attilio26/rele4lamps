@@ -77,7 +77,10 @@ elseif(strpos($text,"r01")){
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r10"),29);
-	$response = substr($resp,0,-15);
+	$resp1 = substr($resp,0,-15);
+	$resp3 = substr($resp1,0,-4);
+	$resp2 = substr($resp1,0,9);
+	$response = $resp2.$resp3;
 }
 elseif(strpos($text,"r11")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r11"),29);
