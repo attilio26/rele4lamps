@@ -1,5 +1,5 @@
 <?php
-//04-01-2018
+//09-07-2018
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -74,6 +74,21 @@ elseif(strpos($text,"r01")){
 	$response = substr($resp,0,-15);
 }
 */
+//<-- Comandi al rele GPIO0
+elseif(strpos($text,"r00")){
+	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r00"),29);
+	$resp1 = substr($resp,0,-15);
+	$resp2 = substr($resp1,0,9);
+	$resp3 = substr($resp1,26);
+	$response = $resp2.$resp3;
+}
+elseif(strpos($text,"r01")){
+	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r01"),29);
+	$resp1 = substr($resp,0,-15);
+	$resp2 = substr($resp1,0,9);
+	$resp3 = substr($resp1,26);
+	$response = $resp2.$resp3;
+}
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r10"),29);
@@ -158,8 +173,8 @@ $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
 $parameters["reply_markup"] = '{ "keyboard": [
-["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34"],
-["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35"],
+["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
+["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
 ["/ron \ud83d\udd34", "/roff \ud83d\udd35"],
 ["/stato \u2753", "/reset"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
