@@ -1,5 +1,5 @@
 <?php
-//09-07-2018
+//17-09-2019
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -80,14 +80,16 @@ elseif(strpos($text,"r00")){
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 elseif(strpos($text,"r01")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r01"),29);
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 //<-- Comandi al rele GPIO1
 elseif(strpos($text,"r10")){
@@ -95,14 +97,16 @@ elseif(strpos($text,"r10")){
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 elseif(strpos($text,"r11")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r11"),29);
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 //<-- Comandi al rele GPIO2
 elseif(strpos($text,"r20")){
@@ -110,14 +114,16 @@ elseif(strpos($text,"r20")){
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 elseif(strpos($text,"r21")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r21"),29);
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 //<-- Comandi al rele GPIO3
 elseif(strpos($text,"r30")){
@@ -125,14 +131,16 @@ elseif(strpos($text,"r30")){
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 elseif(strpos($text,"r31")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r31"),29);
 	$resp1 = substr($resp,0,-15);
 	$resp2 = substr($resp1,0,9);
 	$resp3 = substr($resp1,26);
-	$response = $resp2.$resp3;
+	$response = substr($resp,0,-15);
+	//$response = $resp2.$resp3;
 }
 //<-- Comando Total OFF
 elseif(strpos($text,"roff")){
