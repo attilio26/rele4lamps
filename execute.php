@@ -155,7 +155,8 @@ elseif(strpos($text,"ron")){
 
 //<-- Lettura stato dei rele
 elseif(strpos($text,"stato")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rf?");
+	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf?"),29);
+	$response = substr($resp,0,-15);
 }
 //<-- reset modulo
 elseif(strpos($text,"reset")){
