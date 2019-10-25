@@ -1,5 +1,5 @@
 <?php
-//17-09-2019
+//25-10-2019
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -61,6 +61,9 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/r10 -> GPIO1 LOW  /r11 -> GPIO1 HIGH 
 	/r20 -> GPIO2 LOW  /r21 -> GPIO2 HIGH 
 	/r30 -> GPIO3 LOW  /r31 -> GPIO3 HIGH 
+	/ron -> All GPIO ON
+	/roff -> All GPIO OFF
+	/reset -> restart Station
 	/status  -> Lettura     \n/verbose -> parametri del messaggio";
 }
 /*
@@ -154,7 +157,7 @@ elseif(strpos($text,"ron")){
 }
 
 //<-- Lettura stato dei rele
-elseif(strpos($text,"stato")){
+elseif(strpos($text,"status")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf?"),29);
 	$response = substr($resp,0,-15);
 }
