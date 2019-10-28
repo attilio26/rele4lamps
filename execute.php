@@ -64,7 +64,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/ron -> All GPIO ON
 	/roff -> All GPIO OFF
 	/reset -> restart Station
-	/stat  -> Lettura     \n/verbose -> parametri del messaggio";
+	/stato  -> Lettura     \n/verbose -> parametri del messaggio";
 }
 /*
 //<-- Comandi al rele GPIO0
@@ -157,7 +157,7 @@ elseif(strpos($text,"ron")){
 }
 
 //<-- Lettura stato dei rele
-elseif(strpos($text,"stat")){
+elseif(strpos($text,"stato")){
 	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rq"),29);
 	$response = substr($resp,0,-15);
 }
@@ -188,7 +188,7 @@ $parameters["reply_markup"] = '{ "keyboard": [
 ["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
 ["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
 ["/ron \ud83d\udd34", "/roff \ud83d\udd35"],
-["/stat \u2753", "/reset"]],
+["/stato \u2753", "/reset"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
