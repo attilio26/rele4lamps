@@ -164,7 +164,7 @@ elseif(strpos($text,"stato")){
 }
 //<-- collegamento a dashboard Adafruit
 elseif(strpos($text,"ada")){
-	$response = file_get_contents("https://io.adafruit.com/attilio26/dashboards/esp01-2lamps");
+	$response = file_get_contents("https://io.adafruit.com/attilio26/dashboards/esp01-2lamps/link_altervista1.html");
 }
 //<-- reset modulo
 elseif(strpos($text,"reset")){
