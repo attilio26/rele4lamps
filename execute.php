@@ -165,7 +165,7 @@ elseif(strpos($text,"stato")){
 //<-- collegamento a dashboard Adafruit
 elseif(strpos($text,"ada")){
 	$response = file_get_contents("https://io.adafruit.com/attilio26/dashboards/esp01-2lamps");
-
+}
 //<-- reset modulo
 elseif(strpos($text,"reset")){
 	$response = file_get_contents("http://dario95.ddns.net:20083/rst");
