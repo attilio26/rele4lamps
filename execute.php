@@ -1,5 +1,5 @@
 <?php
-//16-01-2020
+//11-08-2020
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -36,6 +36,16 @@ if(!$update)
   exit;
 }
 
+function clean_html_page($str_in){
+	$startch = strpos($str_in,"er><h2>") + 1 ;									//primo carattere utile da estrarre
+	$endch = strpos($str_in," </a></h2><foot");									//ultimo carattere utile da estrarre
+	$str_in = substr($str_in,$startch,$endch - $startch);				// substr(string,start,length)
+	$str_in = str_replace("<a href='?a="," ",$str_in);
+	$str_in = str_replace("r><h2>"," ",$str_in);
+	$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
+	return $str_in;
+}
+
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
 $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
@@ -57,118 +67,57 @@ $response = '';
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	$response = "Ciao $firstname, benvenuto! \n List of commands : 
-	/r00 -> GPIO0 LOW  /r01 -> GPIO0 HIGH
-	/r10 -> GPIO1 LOW  /r11 -> GPIO1 HIGH 
-	/r20 -> GPIO2 LOW  /r21 -> GPIO2 HIGH 
-	/r30 -> GPIO3 LOW  /r31 -> GPIO3 HIGH 
-	/ron -> All GPIO ON
-	/roff -> All GPIO OFF
-	/ada  -> Adafruit dashboard
-	/reset -> restart Station
-	/stato  -> Lettura     \n/verbose -> parametri del messaggio";
-}
-/*
-//<-- Comandi al rele GPIO0
-elseif(strpos($text,"r00")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r00"),29);
-	$response = substr($resp,0,-15);
-}
-elseif(strpos($text,"r01")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r01"),29);
-	$response = substr($resp,0,-15);
-}
-*/
-//<-- Comandi al rele GPIO0
-elseif(strpos($text,"r00")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r00"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-elseif(strpos($text,"r01")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r01"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-//<-- Comandi al rele GPIO1
-elseif(strpos($text,"r10")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r10"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-elseif(strpos($text,"r11")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r11"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-//<-- Comandi al rele GPIO2
-elseif(strpos($text,"r20")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r20"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-elseif(strpos($text,"r21")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r21"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-//<-- Comandi al rele GPIO3
-elseif(strpos($text,"r30")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r30"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-elseif(strpos($text,"r31")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/r31"),29);
-	$resp1 = substr($resp,0,-15);
-	$resp2 = substr($resp1,0,9);
-	$resp3 = substr($resp1,26);
-	$response = substr($resp,0,-15);
-	//$response = $resp2.$resp3;
-}
-//<-- Comando Total OFF
-elseif(strpos($text,"roff")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf0"),29);
-	$response = substr($resp,0,-15);
-}
-//<-- Comando Total ON
-elseif(strpos($text,"ron")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rf1"),29);
-	$response = substr($resp,0,-15);
+	/r01 -> GPIO0 LOW  /r00 -> GPIO0 HIGH
+	/r11 -> GPIO1 LOW  /r10 -> GPIO1 HIGH 
+	/r21 -> GPIO2 LOW  /r20 -> GPIO2 HIGH 
+	/r31 -> GPIO3 LOW  /r30 -> GPIO3 HIGH 
+	/stato 		-> Stato rele     \n/verbose -> parametri del messaggio";
 }
 
-//<-- Lettura stato dei rele
+//<-- Comandi al rele GPIO0
+elseif(strpos($text,"r01")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=1");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"r00")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
+	$esponse = clean_html_page($resp);
+}
+
+//<-- Comandi al rele GPIO1
+elseif(strpos($text,"r11")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=2");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"r10")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=3");
+	$esponse = clean_html_page($resp);
+}
+
+//<-- Comandi al rele GPIO2
+elseif(strpos($text,"r21")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=4");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"r20")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=5");
+	$esponse = clean_html_page($resp);
+}
+
+//<-- Comandi al rele GPIO3
+elseif(strpos($text,"r31")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=6");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"r30")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=7");
+	$esponse = clean_html_page($resp);
+}
+
+//<-- Lettura stato dei rele 
 elseif(strpos($text,"stato")){
-	$resp = substr(file_get_contents("http://dario95.ddns.net:20083/rq"),29);
-	$response = substr($resp,0,-15);
-}
-//<-- collegamento a dashboard Adafruit
-elseif(strpos($text,"ada")){
-	$response = file_get_contents("http://dario95.ddns.net:9080/linkada.html");
-}
-//<-- reset modulo
-elseif(strpos($text,"reset")){
-	$response = file_get_contents("http://dario95.ddns.net:20083/rst");
+	$resp = file_get_contents("http://dario95.ddns.net:20083");
+	$response = clean_html_page($resp);
 }
 
 //<-- Manda a video la risposta completa
@@ -192,8 +141,7 @@ $parameters["method"] = "sendMessage";
 $parameters["reply_markup"] = '{ "keyboard": [
 ["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
 ["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
-["/ron \ud83d\udd34", "/roff \ud83d\udd35"],
-["/stato \u2753", "/ada", "/reset"]],
+["/stato \u2753"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
