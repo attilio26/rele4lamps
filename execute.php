@@ -77,11 +77,11 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 
 //<-- Comandi al rele GPIO0
 elseif(strpos($text,"r01")){
-	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=1");
 	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"r00")){
-	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=1");
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
 	$esponse = clean_html_page($resp);
 }
 
