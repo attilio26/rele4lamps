@@ -88,7 +88,7 @@ elseif(strpos($text,"r01")){
 }
 elseif(strpos($text,"r00")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
-	$esponse = clean_html_page($resp);
+	$response = clean_html_page($resp);
 }
 
 //<-- Comandi al rele GPIO1
@@ -98,7 +98,7 @@ elseif(strpos($text,"r11")){
 }
 elseif(strpos($text,"r10")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=2");
-	$esponse = clean_html_page($resp);
+	$response = clean_html_page($resp);
 }
 
 //<-- Comandi al rele GPIO2
@@ -108,7 +108,7 @@ elseif(strpos($text,"r21")){
 }
 elseif(strpos($text,"r20")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=4");
-	$esponse = clean_html_page($resp);
+	$response = clean_html_page($resp);
 }
 
 //<-- Comandi al rele GPIO3
@@ -118,7 +118,7 @@ elseif(strpos($text,"r31")){
 }
 elseif(strpos($text,"r30")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=6");
-	$esponse = clean_html_page($resp);
+	$response = clean_html_page($resp);
 }
 
 //<-- Lettura stato dei rele 
