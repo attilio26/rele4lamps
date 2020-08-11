@@ -43,7 +43,7 @@ function clean_html_page($str_in){
 	$str_in = str_replace("<a href='?a="," ",$str_in);
 	$str_in = str_replace("r><h2>"," ",$str_in);
 	$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
-	$str_in = str_replace("/>"," ",$str_in);
+	$str_in = str_replace("'/>"," ",$str_in);
 	return $str_in;
 }
 
@@ -68,7 +68,7 @@ $response = '';
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	$response = "Ciao $firstname, benvenuto! \n List of commands : 
-	/r01 -> GPIO0 LOW  /tlc_off -> GPIO0 HIGH
+	/r01 -> GPIO0 LOW  /r00 -> GPIO0 HIGH
 	/r11 -> GPIO1 LOW  /r10 -> GPIO1 HIGH 
 	/r21 -> GPIO2 LOW  /r20 -> GPIO2 HIGH 
 	/r31 -> GPIO3 LOW  /r30 -> GPIO3 HIGH 
@@ -80,7 +80,7 @@ elseif(strpos($text,"r01")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=1");
 	$response = clean_html_page($resp);
 }
-elseif(strpos($text,"tlc_off")){
+elseif(strpos($text,"r00")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
 	$esponse = clean_html_page($resp);
 }
@@ -141,7 +141,7 @@ $parameters["method"] = "sendMessage";
 // imposto la keyboard
 $parameters["reply_markup"] = '{ "keyboard": [
 ["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
-["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/tlc_off \ud83d\udd35"],
+["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
 ["/stato \u2753"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
