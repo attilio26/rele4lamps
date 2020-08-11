@@ -43,6 +43,14 @@ function clean_html_page($str_in){
 	$str_in = str_replace("<a href='?a="," ",$str_in);
 	$str_in = str_replace("r><h2>"," ",$str_in);
 	$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
+	$str_in = str_replace("_  0'/>"," ",$str_in);
+	$str_in = str_replace("_  1'/>"," ",$str_in);
+	$str_in = str_replace("_  2'/>"," ",$str_in);
+	$str_in = str_replace("_  3'/>"," ",$str_in);	
+	$str_in = str_replace("_  4'/>"," ",$str_in);
+	$str_in = str_replace("_  5'/>"," ",$str_in);	
+	$str_in = str_replace("_  6'/>"," ",$str_in);
+	$str_in = str_replace("_  7'/>"," ",$str_in);	
 	return $str_in;
 }
 
