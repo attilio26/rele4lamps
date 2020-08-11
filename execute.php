@@ -78,6 +78,7 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/r11 -> GPIO1 LOW  /r10 -> GPIO1 HIGH 
 	/r21 -> GPIO2 LOW  /r20 -> GPIO2 HIGH 
 	/r31 -> GPIO3 LOW  /r30 -> GPIO3 HIGH 
+	/rf1 -> GPIOx LOW  /rf0 -> GPIOx HIGH 
 	/stato 		-> Stato rele     \n/verbose -> parametri del messaggio";
 }
 
@@ -121,6 +122,17 @@ elseif(strpos($text,"r30")){
 	$response = clean_html_page($resp);
 }
 
+//<-- Comandi a TUTTI i rele
+elseif(strpos($text,"rf1")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=9");
+	$response = clean_html_page($resp);
+}
+elseif(strpos($text,"rf0")){
+	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=8");
+	$response = clean_html_page($resp);
+}
+
+
 //<-- Lettura stato dei rele 
 elseif(strpos($text,"stato")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083");
@@ -148,6 +160,7 @@ $parameters["method"] = "sendMessage";
 $parameters["reply_markup"] = '{ "keyboard": [
 ["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
 ["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
+["/rf0 \ud83d\udd35", "/rf1 \ud83d\udd34"],
 ["/stato \u2753"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
