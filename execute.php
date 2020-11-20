@@ -1,5 +1,5 @@
 <?php
-//28-08-2020
+//20-11-2020
 //started on 04-07-2018
 // La app di Heroku si puo richiamare da browser con
 //			https://rele4lamps.herokuapp.com/
@@ -76,7 +76,7 @@ $response = '';
 
 if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	$response = "Ciao $firstname, benvenuto! \n List of commands : 
-	/r01 -> GPIO0 LOW  /r00 -> GPIO0 HIGH
+	/cam1-> GPIO0 LOW  /cam0-> GPIO0 HIGH
 	/r11 -> GPIO1 LOW  /r10 -> GPIO1 HIGH 
 	/r21 -> GPIO2 LOW  /r20 -> GPIO2 HIGH 
 	/r31 -> GPIO3 LOW  /r30 -> GPIO3 HIGH 
@@ -84,17 +84,17 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 	/stato 		-> Stato rele     \n/verbose -> parametri del messaggio";
 }
 
-//<-- Comandi al rele GPIO0
-elseif(strpos($text,"r01")){
+//<-- Comandi al rele telecamera pesci GPIO0
+elseif(strpos($text,"cam1")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=1");
 	$response = clean_html_page($resp);
 }
-elseif(strpos($text,"r00")){
+elseif(strpos($text,"cam0")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=0");
 	$response = clean_html_page($resp);
 }
 
-//<-- Comandi al rele GPIO1
+//<-- Comandi al rele GPIO1 luci aranci 
 elseif(strpos($text,"r11")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=3");
 	$response = clean_html_page($resp);
@@ -104,7 +104,7 @@ elseif(strpos($text,"r10")){
 	$response = clean_html_page($resp);
 }
 
-//<-- Comandi al rele GPIO2
+//<-- Comandi al rele GPIO2 luce atrio
 elseif(strpos($text,"r21")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=5");
 	$response = clean_html_page($resp);
@@ -114,7 +114,7 @@ elseif(strpos($text,"r20")){
 	$response = clean_html_page($resp);
 }
 
-//<-- Comandi al rele GPIO3
+//<-- Comandi al rele GPIO3 luce pesci
 elseif(strpos($text,"r31")){
 	$resp = file_get_contents("http://dario95.ddns.net:20083/?a=7");
 	$response = clean_html_page($resp);
@@ -160,8 +160,8 @@ $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
 $parameters["reply_markup"] = '{ "keyboard": [
-["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/r01 \ud83d\udd34"],
-["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/r00 \ud83d\udd35"],
+["/r31 \ud83d\udd34", "/r21 \ud83d\udd34", "/r11 \ud83d\udd34", "/cam1 \ud83d\udd34"],
+["/r30 \ud83d\udd35", "/r20 \ud83d\udd35", "/r10 \ud83d\udd35", "/cam0 \ud83d\udd35"],
 ["/rf0 \ud83d\udd35", "/rf1 \ud83d\udd34"],
 ["/stato \u2753"]],
  "resize_keyboard": true, "one_time_keyboard": false}';
